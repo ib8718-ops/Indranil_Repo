@@ -1,0 +1,63 @@
+#  Wine Quality Classification
+
+##  Project Overview
+This project applies multiple **machine learning classification models** to the **UCI Red Wine Quality dataset**.  
+The objective is to predict wine quality based on physicochemical properties and compare model performance.
+
+---
+
+##  Dataset
+- **Source:** UCI Machine Learning Repository  
+- **Samples:** 1,599 red wines  
+- **Features:** 11 numeric attributes (e.g., acidity, sugar, pH, alcohol)  
+- **Target:** `quality` (integer score from 3–8)
+
+---
+
+##  Models Implemented
+- Logistic Regression  
+- Decision Tree Classifier  
+- K-Nearest Neighbor (KNN)  
+- Naive Bayes (Gaussian)  
+- Random Forest  
+
+Each model is trained, evaluated, and saved as a `.pkl` file for reuse.
+
+---
+
+## Evaluation Metrics
+For every model, the following metrics are calculated:
+- Accuracy  
+- AUC Score  
+- Precision  
+- Recall  
+- F1 Score  
+- Matthews Correlation Coefficient (MCC)
+
+Results are stored in `test_data.csv`.
+
+---
+
+## 📂 Repository Structure
+project-folder/
+│-- app.py                # main script
+│-- requirements.txt      # dependencies
+│-- README.md             # project description
+│-- test_data.csv         # results table
+│-- winequality-red.csv   # dataset
+│-- logistic_regression.pkl
+│-- decision_tree.pkl
+│-- knn.pkl
+│-- naive_bayes.pkl
+│-- random_forest.pkl
+
+##  How to Run
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+
+Run the script:
+
+python app.py
+
+Check results in test_data.csv and saved models in the folder.
