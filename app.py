@@ -75,7 +75,8 @@ if uploaded_file is not None:
 
         # ✅ Display evaluation metrics
         st.subheader("Evaluation Metrics")
-        st.write(pd.DataFrame(metrics, index=[model_choice]))
+        results_df = pd.DataFrame(metrics, index=[model_choice])
+        st.write(results_df)
 
         # ✅ Confusion matrix
         st.subheader("Confusion Matrix")
@@ -86,3 +87,15 @@ if uploaded_file is not None:
         st.subheader("Classification Report")
         report = classification_report(y_test, y_pred, output_dict=True)
         st.write(pd.DataFrame(report).transpose())
+
+        # ✅ Save results into test_data.csv
+        results_df.to_csv("test_data.csv", index=True)
+        st.success("Results saved to test_data.csv")
+
+        # ✅ Download button for results
+        st.download_button(
+            label="Download Results as CSV",
+            data=results_df.to_csv().encode("utf-8"),
+            file_name="test_data.csv",
+            mime="text/csv"
+        )
