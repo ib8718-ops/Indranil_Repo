@@ -13,10 +13,10 @@ import joblib
 import os
 
 # Ensure model folder exists
-os.makedirs("/home/cloud/Desktop/model", exist_ok=True)
+os.makedirs("model", exist_ok=True)
 
 # Load dataset
-df = pd.read_csv("/home/cloud/Desktop/winequality-red.csv", sep=";")
+df = pd.read_csv("winequality-red.csv", sep=";")
 
 X = df.drop("quality", axis=1)
 y = df["quality"]
