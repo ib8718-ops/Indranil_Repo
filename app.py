@@ -12,10 +12,10 @@ from sklearn.preprocessing import label_binarize
 import joblib
 import os
 
-# Ensure model folder exists
+# Ensure model folder exists (relative path)
 os.makedirs("model", exist_ok=True)
 
-# Load dataset
+# Load dataset (must be inside your repo)
 df = pd.read_csv("winequality-red.csv", sep=";")
 
 X = df.drop("quality", axis=1)
@@ -46,8 +46,8 @@ for name, model in models.items():
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
 
-    #  Save trained model as .pkl
-    filename = f"/home/cloud/Desktop/model/{name.replace(' ', '_').lower()}.pkl"
+    #  Save trained model as .pkl (relative path)
+    filename = f"model/{name.replace(' ', '_').lower()}.pkl"
     joblib.dump(model, filename)
     print(f"Saved: {filename}")   # Debug message to confirm saving
 
@@ -67,7 +67,7 @@ for name, model in models.items():
         "MCC": matthews_corrcoef(y_test, y_pred)
     }
 
-# Save results table
+#  Save results table (relative path)
 results_df = pd.DataFrame(results).T
 print(results_df)
-results_df.to_csv("/home/cloud/Desktop/test_data.csv", index=True)
+results_df.to_csv("test_data.csv", index=True)
