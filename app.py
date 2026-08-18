@@ -12,24 +12,24 @@ from sklearn.preprocessing import label_binarize
 import joblib
 import os
 
-# Ensure model folder exists (relative path)
+# ✅ Ensure model folder exists (relative path)
 os.makedirs("model", exist_ok=True)
 
-# Load dataset (must be inside your repo)
+# ✅ Load dataset (must be inside your repo)
 df = pd.read_csv("winequality-red.csv", sep=";")
 
 X = df.drop("quality", axis=1)
 y = df["quality"]
 
-# Train-test split
+# ✅ Train-test split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Scale features
+# ✅ Scale features
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# Models
+# ✅ Models
 models = {
     "Logistic Regression": LogisticRegression(max_iter=1000),
     "Decision Tree": DecisionTreeClassifier(),
@@ -46,12 +46,12 @@ for name, model in models.items():
     model.fit(X_train, y_train)
     y_pred = model.predict(X_test)
 
-    #  Save trained model as .pkl (relative path)
+    # ✅ Save trained model as .pkl (relative path)
     filename = f"model/{name.replace(' ', '_').lower()}.pkl"
     joblib.dump(model, filename)
-    print(f"Saved: {filename}")   # Debug message to confirm saving
+    print(f"Saved: {filename}")
 
-    # Probabilities for AUC
+    # ✅ Probabilities for AUC
     if hasattr(model, "predict_proba"):
         y_prob = model.predict_proba(X_test)
         auc = roc_auc_score(y_test_bin, y_prob, multi_class="ovr")
@@ -67,7 +67,10 @@ for name, model in models.items():
         "MCC": matthews_corrcoef(y_test, y_pred)
     }
 
-#  Save results table (relative path)
+# ✅ Save results table (relative path)
 results_df = pd.DataFrame(results).T
 print(results_df)
 results_df.to_csv("test_data.csv", index=True)
+
+# ✅ Debugging: confirm files saved
+print("Files in model folder:", os.listdir("model"))
